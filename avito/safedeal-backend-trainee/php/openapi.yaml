@@ -1,0 +1,241 @@
+openapi: '3.1'
+info:
+  title: 'Safedeal backend'
+  version: '1.0'
+paths:
+  '/api/deal':
+    get:
+      summary: 'Get all deals'
+      responses:
+        200:
+          description: 'All deals ordered by date'
+          content:
+            'application/json':
+              schema:
+                type: 'array'
+                items:
+                  type: 'object'
+                  description: 'Main information about deal'
+                  properties:
+                    id:
+                      type: 'integer'
+                    address:
+                      type: 'string'
+                      maxLength: 512
+                    delivery_date:
+                      type: 'string'
+                      format: 'date-time'
+    post:
+      summary: 'Add new deal'
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                product_id:
+                  type: 'integer'
+                address:
+                  type: 'string'
+                  maxLength: 512
+                delivery_date:
+                  type: 'string'
+                  format: 'date-time'
+      responses:
+        201:
+          description: 'Successfully created deal'
+          content:
+            'application/json':
+              schema:
+                type: 'object'
+                properties:
+                  id:
+                    type: 'integer'
+        422:
+          description: 'Invalid input data'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/api/deal/{id}':
+    get:
+      summary: "Get deal's info by id"
+      responses:
+        200:
+          description: "Deal's info"
+          content:
+            'application/json':
+              schema:
+                type: 'object'
+                properties:
+                  id:
+                    type: 'integer'
+                  product_id:
+                    type: 'integer'
+                  cost:
+                    type: 'number'
+                    format: 'double'
+                  address:
+                    type: 'string'
+                    maxLength: 512
+                  delivery_date:
+                    type: 'string'
+                    format: 'date-time'
+                  user_id:
+                    type: 'integer'
+        404:
+          description: 'No deal with such id'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Message'
+  '/api/deal/deliveryCost':
+    get:
+      summary: 'Get the cost of delivery'
+      parameters:
+        - name: 'address'
+          description: 'Destination address'
+          in: 'path'
+          required: true
+      responses:
+        200:
+          description: 'The cost of delivery'
+          content:
+            'application/json':
+              schema:
+                type: 'object'
+                properties:
+                  cost:
+                    type: 'number'
+                    format: 'double'
+        422:
+          description: 'Invalid input data'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/api/auth/login':
+    post:
+      summary: 'Authenticate user'
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: 'object'
+              properties:
+                email:
+                  type: 'string'
+                  format: 'email'
+                password:
+                  type: 'string'
+                  format: 'password'
+      responses:
+        200:
+          description: 'Successfully passed authentication'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        401:
+          description: 'Authentication failed'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Message'
+  '/api/auth/logout':
+    post:
+      summary: 'Logout user'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 'Successfully logged out user'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Message'
+  '/api/auth/refresh':
+    post:
+      summary: 'Refresh access token'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 'Successfully refreshed access token'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        401:
+          description: 'Failed to refresh access token'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Message'
+  '/api/auth/user':
+    get:
+      summary: 'Get user info'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 'User info'
+          content:
+            'application/json':
+              schema:
+                type: 'object'
+                properties:
+                  id:
+                    type: 'integer'
+                  name:
+                    type: 'string'
+                  email:
+                    type: 'string'
+                    format: 'email'
+                  email_verified_at:
+                    type: 'string'
+                    format: 'date-time'
+                  created_at:
+                    type: 'string'
+                    format: 'date-time'
+                  updated_at:
+                    type: 'string'
+                    format: 'date-time'
+        401:
+          description: 'Failed to get user info'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Message'
+components:
+  schemas:
+    Error:
+      type: 'object'
+      properties:
+        message:
+          type: 'string'
+        errors:
+          type: 'array'
+          items:
+            type: 'object'
+            properties:
+              '{fieldname}':
+                type: 'array'
+                items:
+                  type: 'string'
+                  description: 'Error descriptions for given field'
+    Message:
+      type: 'object'
+      properties:
+        message:
+          type: 'string'
+    AccessToken:
+      type: 'object'
+      properties:
+        access_token:
+          type: 'string'
+  securitySchemes:
+    bearerAuth:
+      type: 'http'
+      scheme: 'bearer'
+      bearerFormat: 'JWT'
