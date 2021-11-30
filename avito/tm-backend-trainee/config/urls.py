@@ -1,4 +1,4 @@
-"""avito URL Configuration
+"""config URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -14,17 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
-from trainee.views import show, save, reset
-
-stats = [
-    path('show/', show),
-    path('save/', save),
-    path('reset/', reset)
-]
+from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
-    path('stats/', include(stats)),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('stats/', include('api.urls')),
+    path('openapi/', SpectacularAPIView.as_view(authentication_classes=[]), name='schema'),
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema', authentication_classes=[]), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema', authentication_classes=[]), name='redoc'),
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-class SaveStatsSerializer(serializers.Serializer):
+class StatsSerializer(serializers.Serializer):
     date = serializers.DateField()
 
     views = serializers.IntegerField(default=0, min_value=0)
@@ -11,7 +11,7 @@ class SaveStatsSerializer(serializers.Serializer):
     cost = serializers.DecimalField(default=0.0, decimal_places=2, max_digits=8, min_value=0)
 
 
-class ShowStatsQuerySerializer(serializers.Serializer):
+class StatsQueryParamsSerializer(serializers.Serializer):
     from_ = serializers.DateField()
 
     to = serializers.DateField()
@@ -24,7 +24,7 @@ class ShowStatsQuerySerializer(serializers.Serializer):
         return fields
 
 
-class ShowStatsListItemSerializer(serializers.Serializer):
+class AggregatedStatsSerializer(serializers.Serializer):
     date = serializers.DateField()
 
     views = serializers.IntegerField(default=0, min_value=0)

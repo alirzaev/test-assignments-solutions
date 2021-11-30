@@ -2,102 +2,31 @@
 
 Решение [тестового задания](https://github.com/avito-tech/tm-backend-trainee) для backend-разработчиков от [avito](https://avito.ru/)
 
-## Запуск
+## Project setup
+
+### Development
 
 ```shell script
-python manage.py migratse
+pip install -r requirements.txt
+
+python manage.py migrate
 python manage.py runserver
+```
 
-# или
+### Docker
 
+```shell script
 docker-compose up
 ```
 
-## Документация
+## API documentation
 
-### Метод сохранения статистики.
+Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-Запрос:
-```http
-POST http://localhost:8000/stats/save/ HTTP/1.1
-Content-Type: application/json
+ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
-{
-    "date": "2021-09-30",
-    "clicks": 5,
-    "views": 10,
-    "cost": 10.50
-}
-```
+## Unit tests
 
-Ответ:
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 11
-
-{
-    "ok": true
-}
-```
-
-### Метод показа статистики
-
-Запрос:
-```http
-GET http://localhost:8000/stats/show/?from=2021-09-29&to=2021-09-30 HTTP/1.1
-```
-
-Параметры **query string**:
-
-- `from` - дата начала периода (включительно), формат: `YYYY-MM-DD`
-
-- `to` - дата окончания периода (включительно), формат: `YYYY-MM-DD`
-
-Ответ:
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 189
-
-{
-    "ok": true,
-    "stats": [
-        {
-            "date": "2021-09-29",
-            "views": 10,
-            "clicks": 50,
-            "cost": "100.50",
-            "cpc": 2.01,
-            "cpm": 10050.0
-        },
-        {
-            "date": "2021-09-30",
-            "views": 10,
-            "clicks": 5,
-            "cost": "10.50",
-            "cpc": 2.1,
-            "cpm": 1050.0
-        }
-    ]
-}
-```
-
- 
-### Метод сброса статистики
-
-Запрос:
-```http
-PUT http://localhost:8000/stats/reset/ HTTP/1.1
-```
-
-Ответ:
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 11
-
-{
-    "ok": true
-}
+```shell script
+pytest
 ```

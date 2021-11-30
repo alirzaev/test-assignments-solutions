@@ -1,9 +1,6 @@
 # Git repository
 .git/
 
-# Local stuff
-/local
-
 # PyCharm
 .idea/
 

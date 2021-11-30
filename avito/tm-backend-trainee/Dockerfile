@@ -10,7 +10,4 @@ COPY . .
 
 RUN python manage.py collectstatic --no-input
 
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD gunicorn -b 0.0.0.0:80 avito.wsgi:application
+CMD ["./docker/runserver.sh"]
