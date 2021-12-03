@@ -2,12 +2,31 @@
 
 Решение [тестового задания](https://github.com/avito-tech/verticals/blob/master/trainee/backend.md) для backend-разработчиков от [avito](https://avito.ru/)
 
-## Запуск
+## Project setup
+
+### Development
 
 ```shell script
-export FLASK_ENV=production
-export DATABASE_URI="postgres://user:password@localhost:5432/database"
+pip install -r requirements.txt
 
-python manage.py db upgrade # применение миграций
-python manage.py runserver # запуск сервера
+python manage.py migrate
+python manage.py runserver
+```
+
+### Docker
+
+```shell script
+docker-compose up
+```
+
+## API documentation
+
+Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+## Unit tests
+
+```shell script
+pytest
 ```
