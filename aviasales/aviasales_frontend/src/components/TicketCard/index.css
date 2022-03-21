@@ -1,0 +1,10 @@
+.ticket-card {
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+}
+
+.ticket-card-header-career {
+  height: 56px;
+  object-fit: contain;
+}
