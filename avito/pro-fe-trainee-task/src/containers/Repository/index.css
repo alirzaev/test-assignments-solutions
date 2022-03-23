@@ -1,0 +1,147 @@
+.repository {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.repository__head {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.repository__head-title {
+  font-size: 25px;
+  margin: 0 10px 0 0;
+}
+
+.repository__head-owner {
+  font-weight: 400;
+}
+
+.repository__head-name {
+  font-weight: 600;
+}
+
+.repository__head-slash::before {
+  content: "/";
+  font-weight: 400;
+  padding: 0 5px;
+}
+
+.repository__head-side {
+  margin-left: auto;
+}
+
+.repository__head-stars {
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.5;
+  color: #6a6969;
+  height: 25px;
+  display: inline-block;
+}
+
+.repository__head-stars::before {
+  position: absolute;
+  content: "\2605";
+  left: 0;
+  width: 25px;
+  height: 25px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.repository__head-commit-date {
+  margin-left: 30px;
+  line-height: 1.5;
+}
+
+.repository__owner {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.repository__owner-photo {
+  width: 40px;
+  height: 40px;
+}
+.repository__owner-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.repository__owner-name {
+  margin-left: 15px;
+}
+
+.repository__owner-name a {
+  font-weight: 400;
+  font-size: 1.1em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.repository__owner-name a:hover {
+  color: rgb(var(--form-base-color));
+}
+
+.repository__languages {
+  margin-top: 30px;
+}
+
+.repository__languages-title {
+  font-weight: 600;
+}
+
+.repository__languages-list {
+  padding-left: 0;
+  margin: 10px 0 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px 5px;
+}
+
+.repository__languages-list-item {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 16px;
+  border: 1px solid #bbbbbb;
+}
+
+.repository__description {
+  margin-top: 30px;
+}
+
+.repository__top-contributors {
+  margin-top: 30px;
+}
+
+.repository__top-contributors-title {
+  font-weight: 600;
+}
+
+.repository__top-contributors-list {
+  margin: 10px 0 0 0;
+}
+
+.repository__top-contributors-list-item a {
+  font-weight: 400;
+  font-size: 1.1em;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1.5;
+}
+
+.repository__top-contributors-list-item a:hover {
+  color: rgb(var(--form-base-color));
+}
