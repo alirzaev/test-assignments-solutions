@@ -1,0 +1,146 @@
+.detailed-photo {
+  display: grid;
+  grid-template-rows: 205px 160px;
+  grid-template-columns: 330px 230px;
+}
+
+@media (max-width: 620px) {
+  .detailed-photo {
+    display: grid;
+    grid-template-rows: fit-content(205px) minmax(125px, auto) 160px;
+    grid-template-columns: auto;
+  }
+}
+
+.detailed-photo__photo-wrapper {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 620px) {
+  .detailed-photo__photo-wrapper {
+    margin: -30px -30px 0 -30px;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    align-items: flex-start;
+  }
+}
+
+.detailed-photo__photo {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media (max-width: 620px) {
+  .detailed-photo__photo {
+    width: 100%;
+  }
+}
+
+.detailed-photo__comments {
+  grid-row: 1/3;
+  grid-column: 2/3;
+  overflow: hidden;
+}
+
+@media (max-width: 620px) {
+  .detailed-photo__comments {
+    padding-top: 25px;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    overflow-y: scroll;
+  }
+}
+
+.detailed-photo__comments-empty {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.detailed-photo__comments-empty-text {
+  margin: 0;
+  text-align: center;
+}
+
+.detailed-photo__comments-list {
+  margin: 0;
+  padding: 0;
+  margin-left: 15px;
+  list-style: none;
+}
+
+.detailed-photo__comments-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.detailed-photo__comments-date {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  color: #999999;
+  margin-bottom: 5px;
+}
+
+.detailed-photo__comments-content {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+
+.detailed-photo__form {
+  grid-row: 2/3;
+  grid-column: 1/2;
+}
+
+@media (max-width: 620px) {
+  .detailed-photo__form {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+}
+
+.detailed-photo__form-layout {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.detailed-photo__form-field {
+  background: #ffffff;
+  height: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+}
+
+.detailed-photo__form-button {
+  height: 30px;
+  background: #4997d0;
+  border-radius: 3px;
+  border: transparent;
+  color: #ffffff;
+}
+
+.detailed-photo__form-button:disabled {
+  background: #4997d0a6;
+}

@@ -1,28 +1,32 @@
-import axios from 'axios';
+import api from "../utils/api";
 
-export const FETCH_PHOTOS_REQUEST = 'FETCH_PHOTOS_REQUEST';
+export const FETCH_PHOTOS_REQUEST = "FETCH_PHOTOS_REQUEST";
 
-export const FETCH_PHOTOS_SUCCESS = 'FETCH_PHOTOS_SUCCESS';
+export const FETCH_PHOTOS_SUCCESS = "FETCH_PHOTOS_SUCCESS";
 
-export const FETCH_PHOTOS_FAILED = 'FETCH_PHOTOS_FAILED';
+export const FETCH_PHOTOS_FAILED = "FETCH_PHOTOS_FAILED";
 
+/**
+ * @returns thunk action
+ */
 export function fetchPhotos() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
-      type: FETCH_PHOTOS_REQUEST
+      type: FETCH_PHOTOS_REQUEST,
     });
 
-    axios.get('https://boiling-refuge-66454.herokuapp.com/images')
-      .then(response => {
+    api
+      .fetchPhotos()
+      .then((photos) => {
         dispatch({
           type: FETCH_PHOTOS_SUCCESS,
-          payload: response.data
+          payload: photos,
         });
       })
       .catch(() => {
         dispatch({
           type: FETCH_PHOTOS_FAILED,
-          payload: 'FAILED'
+          payload: "FAILED",
         });
       });
   };

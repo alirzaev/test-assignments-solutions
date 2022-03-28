@@ -17,7 +17,7 @@
   line-height: 42px;
   letter-spacing: 0em;
   text-align: center;
-  text-transform: uppercase;;
+  text-transform: uppercase;
   margin: 0 auto;
 }
 
@@ -27,13 +27,30 @@
   flex-grow: 1;
 }
 
+.app-gallery-dummy,
+.app-gallery-error {
+  display: block;
+}
+
+.app-gallery-dummy__text,
+.app-gallery-error__text {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.5em;
+  margin: 0 auto;
+}
+
+.app-gallery-error__text {
+  color: red;
+}
+
 .app-footer {
   width: 100%;
 }
 
 .app-footer__line {
   height: 0;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   margin: 0;
 }
 
